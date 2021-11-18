@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: Koez7
+Build-Jdk: 1.8.0_201
+Implementation-Title: core
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.permata.recurring
+Main-Class: ${start-class}
+
