@@ -1,8 +1,8 @@
 package com.mini.project.tes.config;
-import com.permata.recurring.core.config.security.CustomUserDetailsService;
-import com.permata.recurring.core.config.security.JwtAuthenticationEntryPoint;
-import com.permata.recurring.core.config.security.JwtAuthenticationFilter;
-import com.permata.recurring.core.util.BaseHelper;
+import com.mini.project.tes.config.security.CustomUserDetailsService;
+import com.mini.project.tes.config.security.JwtAuthenticationEntryPoint;
+import com.mini.project.tes.config.security.JwtAuthenticationFilter;
+import com.mini.project.tes.util.BaseHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-/**
- * @author Winner [Alpabit]
- *
- * Dec 4, 2019
- */
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

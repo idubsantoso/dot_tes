@@ -6,7 +6,7 @@ package com.mini.project.tes.repository;
  * Dec 4, 2019
  */
 
-import com.permata.recurring.core.model.entity.JwtRefreshTokenEntity;
+import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,8 @@
 package com.mini.project.tes.config.security;
 
-import com.permata.recurring.core.assembler.SamUserAssembler;
-import com.permata.recurring.core.model.dto.User;
-import com.permata.recurring.core.service.AtfUmaUserAssignmentService;
-import com.permata.recurring.core.service.SamUserService;
+import com.mini.project.tes.model.entity.SamUserEntity;
+import com.mini.project.tes.repository.SamUserRepository;
+import com.mini.project.tes.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,26 +19,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private SamUserService samUserService;
-    @Autowired
-    private AtfUmaUserAssignmentService atfUmaUserAssignmentService;
-    @Autowired
-    private SamUserAssembler samUserAssembler;
+    private SamUserRepository samUserService;
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String usernameOrEmail)
             throws UsernameNotFoundException {
-        User user = samUserService.findByUsername(usernameOrEmail);
+        SamUserEntity user = samUserService.findByUsername(usernameOrEmail);
         if(user == null) {
-        	new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail);
+            new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail);
         }
         return UserPrincipal.create(user);
     }
-
     @Transactional
     public UserDetails loadUserById(long id) {
         try {
-            User user = samUserService.findById(id);
+            SamUserEntity user = samUserService.getById(id);
 //            AtfUmaUserAssignment atfUmaUserAssignment = atfUmaUserAssignmentService.findByUserAndStatusActive(samUserAssembler.convertToEntity(user));
 
             return UserPrincipal.create(user);

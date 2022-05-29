@@ -1,11 +1,11 @@
 package com.mini.project.tes.service.impl;
 
-import com.permata.recurring.core.assembler.JwtRefreshTokenAssembler;
-import com.permata.recurring.core.model.dto.JwtRefreshToken;
-import com.permata.recurring.core.model.entity.JwtRefreshTokenEntity;
-import com.permata.recurring.core.repository.JwtRefreshTokenRepository;
-import com.permata.recurring.core.service.JwtRefreshTokenService;
-import com.permata.recurring.core.service.error.ServiceException;
+import com.mini.project.tes.assembler.JwtRefreshTokenAssembler;
+import com.mini.project.tes.model.dto.JwtRefreshToken;
+import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
+import com.mini.project.tes.repository.JwtRefreshTokenRepository;
+import com.mini.project.tes.service.JwtRefreshTokenService;
+import com.mini.project.tes.service.error.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

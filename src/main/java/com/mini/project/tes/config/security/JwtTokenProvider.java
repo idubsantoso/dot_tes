@@ -1,9 +1,8 @@
 package com.mini.project.tes.config.security;
 
-import com.permata.recurring.core.model.dto.JwtRefreshToken;
-import com.permata.recurring.core.service.JwtRefreshTokenService;
-import com.permata.recurring.core.service.SecurityParameterService;
-import com.permata.recurring.core.util.UserUtil;
+import com.mini.project.tes.model.dto.JwtRefreshToken;
+import com.mini.project.tes.service.JwtRefreshTokenService;
+
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,34 +31,24 @@ public class JwtTokenProvider {
 
     @Autowired
     private JwtRefreshTokenService jwtTokenService;
-    @Autowired
-    private SecurityParameterService securityParameterService;
-    @Autowired
-    private UserUtil userUtil;
-
-    //private JwtAuthenticationFilter jwtFilter;
-//    public static HashMap<Long, Date> lastAction = new HashMap<>();
 
     public String generateToken(UserPrincipal userPrincipal) {
         Date now = new Date();
-//        System.out.println(securityParameterService.findAll().get(0).getMinuteExpiredLogin()*60*1000);
-        Date expiryDate = new Date(now.getTime()+(securityParameterService.findAll().get(0).getMinuteExpiredLogin()+jwtExpiredToken)*60*1000);
         return Jwts.builder()
                 .setSubject(Long.toString(userPrincipal.getId()))
                 .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
+//                .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
     public String generateTokenForEngine(UserDetails userPrincipal) {
         Date now = new Date();
         Map<String, Object> claims = new HashMap<>();
-        Date expiryDate = new Date(now.getTime()+(securityParameterService.findAll().get(0).getMinuteExpiredLogin()+jwtExpiredToken)*60*1000);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userPrincipal.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
+//                .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
     public String generateRefreshToken() {
@@ -104,49 +93,5 @@ public class JwtTokenProvider {
             logger.error("JWT claims string is empty.");
         }
         return false;
-    }
-
-    /*
-    public void invalidateToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        String token = bearerToken.substring(6, bearerToken.length());
-        try {
-            JwtRefreshToken refreshToken = jwtTokenService.findByUserId(getUserIdFromJWT(token));
-            User userOptional = samUserService.findById(getUserIdFromJWT(token));
-            userOptional.setLastLogOut(new Date());
-
-            samUserService.update(userOptional);
-            jwtTokenService.deleteJwt(refreshToken);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            //;e.printStackTrace();
-        }
-    }
-
-     */
-
-    public void invalidateTokenByUserId(Long userId) {
-        try {
-            JwtRefreshToken refreshToken = jwtTokenService.findByUserId(userId);
-            //delete all static variable from user util
-            jwtTokenService.deleteJwt(refreshToken);
-            userUtil.userEntityLogin.remove(userId);
-            userUtil.unitIdUserLogin.remove(userId);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            //;e.printStackTrace();
-        }
-    }
-    
-    public void invalidateToken(JwtRefreshToken refreshToken) {
-        try {
-            jwtTokenService.deleteJwt(refreshToken);
-            long id = getUserIdFromJWT(refreshToken.getAccessToken());
-            userUtil.userEntityLogin.remove(id);
-            userUtil.unitIdUserLogin.remove(id);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            //;e.printStackTrace();
-        }
     }
 }

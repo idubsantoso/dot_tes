@@ -1,7 +1,7 @@
 package com.mini.project.tes.service;
 
-import com.permata.recurring.core.model.dto.JwtRefreshToken;
-import com.permata.recurring.core.model.entity.JwtRefreshTokenEntity;
+import com.mini.project.tes.model.dto.JwtRefreshToken;
+import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 
 import java.util.Optional;
 

@@ -1,7 +1,7 @@
-package com.permata.recurring.core.assembler;
+package com.mini.project.tes.assembler;
 
-import com.permata.recurring.core.model.dto.JwtRefreshToken;
-import com.permata.recurring.core.model.entity.JwtRefreshTokenEntity;
+import com.mini.project.tes.model.dto.JwtRefreshToken;
+import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtRefreshTokenAssembler {
-    @Autowired
+//    @Autowired
     private ModelMapper modelMapper;
 
     public JwtRefreshToken convertToDto(JwtRefreshTokenEntity jwtRefreshTokenEntity){
