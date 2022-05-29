@@ -10,11 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * @author Winner [Alpabit]
- *
- * Dec 4, 2019
- */
 public class UserPrincipal implements UserDetails {
 	private static final long serialVersionUID = 3545972395145669882L;
     private static Collection<SimpleGrantedAuthority> authorities;

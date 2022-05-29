@@ -1,5 +1,7 @@
 package com.mini.project.tes.model.dto;
 
+import com.mini.project.tes.model.entity.SamUserEntity;
+
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Date;
@@ -8,7 +10,7 @@ public class JwtRefreshToken {
     private String token;
     private String accessToken;
     @NotNull
-    private User user;
+    private SamUserEntity user;
 
     private Instant expirationDateTime;
     private Date createdDate;
@@ -22,13 +24,13 @@ public class JwtRefreshToken {
         this.token = token;
     }
 
-    public JwtRefreshToken(String token, User user, Instant expirationDateTime) {
+    public JwtRefreshToken(String token, SamUserEntity user, Instant expirationDateTime) {
         this.token = token;
         this.user = user;
         this.expirationDateTime = expirationDateTime;
     }
     
-    public JwtRefreshToken(String token, String accessToken, User user, Instant expirationDateTime, Date createdDate) {
+    public JwtRefreshToken(String token, String accessToken, SamUserEntity user, Instant expirationDateTime, Date createdDate) {
         this.token = token;
         this.accessToken = accessToken;
         this.createdDate = createdDate;
@@ -51,13 +53,6 @@ public class JwtRefreshToken {
 		this.accessToken = accessToken;
 	}
 
-	public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getLoginIp() {
         return loginIp;
@@ -90,5 +85,12 @@ public class JwtRefreshToken {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-    
+
+    public SamUserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(SamUserEntity user) {
+        this.user = user;
+    }
 }

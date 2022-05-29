@@ -9,10 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalTime;
 import java.util.UUID;
 
-/**
- * @author Winner [Alpabit]
- * 07/04/2021
- */
 public class LogInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {

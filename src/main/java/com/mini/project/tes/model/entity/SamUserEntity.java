@@ -44,7 +44,7 @@ public class SamUserEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastLogOut;
 
-	private int LoginAttempt;
+	private Integer LoginAttempt;
 
 
 	public Long getId() {
@@ -119,11 +119,11 @@ public class SamUserEntity implements Serializable {
 		this.lastLogOut = lastLogOut;
 	}
 
-	public int getLoginAttempt() {
+	public Integer getLoginAttempt() {
 		return LoginAttempt;
 	}
 
-	public void setLoginAttempt(int loginAttempt) {
+	public void setLoginAttempt(Integer loginAttempt) {
 		LoginAttempt = loginAttempt;
 	}
 }

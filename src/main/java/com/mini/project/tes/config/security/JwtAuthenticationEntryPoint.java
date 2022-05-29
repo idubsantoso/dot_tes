@@ -11,11 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @author Winner [Alpabit]
- *
- * Dec 4, 2019
- */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

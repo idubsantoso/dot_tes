@@ -16,11 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * @author Winner [Alpabit]
- * <p>
- * Dec 4, 2019
- */
 @Component
 public class JwtTokenProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
@@ -93,5 +88,13 @@ public class JwtTokenProvider {
             logger.error("JWT claims string is empty.");
         }
         return false;
+    }
+    public void invalidateToken(JwtRefreshToken refreshToken) {
+        try {
+            jwtTokenService.deleteJwt(refreshToken);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            //;e.printStackTrace();
+        }
     }
 }
