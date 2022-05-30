@@ -1,5 +1,8 @@
 package com.mini.project.tes.model.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -14,6 +17,9 @@ import java.util.Set;
  * 
  */
 @Entity
+@Getter
+@Setter
+@Data
 @Table(name="sam_user")
 public class SamUserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -36,54 +42,4 @@ public class SamUserEntity implements Serializable {
 
 	private Integer LoginAttempt;
 
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public Date getLastLogIn() {
-		return lastLogIn;
-	}
-
-	public void setLastLogIn(Date lastLogIn) {
-		this.lastLogIn = lastLogIn;
-	}
-
-	public Date getLastLogOut() {
-		return lastLogOut;
-	}
-
-	public void setLastLogOut(Date lastLogOut) {
-		this.lastLogOut = lastLogOut;
-	}
-
-	public Integer getLoginAttempt() {
-		return LoginAttempt;
-	}
-
-	public void setLoginAttempt(Integer loginAttempt) {
-		LoginAttempt = loginAttempt;
-	}
 }

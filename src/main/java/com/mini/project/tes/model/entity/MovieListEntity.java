@@ -1,10 +1,16 @@
 package com.mini.project.tes.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@Data
 @Table(name = "MOVIE_LIST")
 public class MovieListEntity extends Auditable<String> {
 
@@ -23,44 +29,5 @@ public class MovieListEntity extends Auditable<String> {
     private String details;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public Integer getRate() {
-        return rate;
-    }
-
-    public void setRate(Integer rate) {
-        this.rate = rate;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
 
 }

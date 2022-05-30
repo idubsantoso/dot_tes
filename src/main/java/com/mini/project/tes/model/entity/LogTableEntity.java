@@ -1,9 +1,16 @@
 package com.mini.project.tes.model.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Getter
+@Setter
+@Data
 @Table(name = "log_table")
 public class LogTableEntity {
     @Id
@@ -24,46 +31,6 @@ public class LogTableEntity {
     private String object;
 
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Timestamp getLogTime() {
-        return logTime;
-    }
-
-    public void setLogTime(Timestamp logTime) {
-        this.logTime = logTime;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-
-    public String getEvent() {
-        return event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(String object) {
-        this.object = object;
-    }
 
 
     public static final class LogTableBuilder {
