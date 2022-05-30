@@ -29,10 +29,11 @@ public class MainScheduler {
     private TaskExecutor taskExecutor;
 
 
-//    @Scheduled(cron= "${recurring.jobs.autoScheduleJob.schedule}")  //TODO enable for prod
+//    @Scheduled(cron= "${recurring.jobs.autoScheduleJob.schedule}")
     @Scheduled(fixedDelayString="${dot.jobs.scheduleJob.fixedRate}", zone="${dot.jobs.scheduleJob.zone}")
     public void scheduleAuto() {
         if (scheduleJobEnable){
+            log.info("run schedule job");
             service.jobDelete();
         }
     }
