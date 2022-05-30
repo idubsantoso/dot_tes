@@ -19,5 +19,6 @@ public interface MovieListService {
     public MovieListEntity getFile(Long id);
     public Stream<MovieListEntity> getAllFiles();
     List<MovieListEntity> findByCategory(String category);
+    void jobDelete();
 //    public MovieListEntity storeFile(MultipartFile file,MovieListEntity movieListEntity) throws FileStorageException, IOException;
 }

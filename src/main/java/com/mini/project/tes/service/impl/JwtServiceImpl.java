@@ -32,6 +32,7 @@ public class JwtServiceImpl implements JwtService {
         	jwtTokenService.deleteJwt(isExist);
             isExist.setAccessToken(accessToken);
             isExist.setCreatedDate(today);
+            isExist.setUser(samUserService.getById(userPrincipal.getId()));
             jwtTokenService.saveJwt(isExist);
         }
         else {

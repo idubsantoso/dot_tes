@@ -138,4 +138,14 @@ public class MovieListServiceImpl implements MovieListService {
         return repo.findAll().stream();
     }
 
+    @Override
+    public void jobDelete(){
+        List<MovieListEntity> entities = repo.findAll();
+        if(entities.size()>0){
+            for (MovieListEntity movieListEntity:entities){
+                delete(movieListEntity);
+            }
+        }
+    }
+
 }
