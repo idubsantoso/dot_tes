@@ -1,6 +1,7 @@
 package com.mini.project.tes.config.security;
 
 import com.mini.project.tes.model.dto.JwtRefreshToken;
+import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import com.mini.project.tes.service.JwtRefreshTokenService;
 
 import io.jsonwebtoken.*;
@@ -65,7 +66,7 @@ public class JwtTokenProvider {
 //        	lastAction.remove(getUserIdFromJWT(authToken));
 //        	lastAction.put(getUserIdFromJWT(authToken), timeLastAction);
 
-        	JwtRefreshToken jwtEnt = jwtTokenService.findByUserId(getUserIdFromJWT(authToken));
+        	JwtRefreshTokenEntity jwtEnt = jwtTokenService.findByUserId(getUserIdFromJWT(authToken));
         	if(jwtEnt==null){
         	    return false;
         	}else {
@@ -89,7 +90,7 @@ public class JwtTokenProvider {
         }
         return false;
     }
-    public void invalidateToken(JwtRefreshToken refreshToken) {
+    public void invalidateToken(JwtRefreshTokenEntity refreshToken) {
         try {
             jwtTokenService.deleteJwt(refreshToken);
         } catch (Exception e) {

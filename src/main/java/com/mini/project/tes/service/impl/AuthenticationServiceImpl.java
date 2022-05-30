@@ -124,7 +124,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             JwtAuthenticationEntryPoint.messErr ="Your session has been expired";
             throw new BadCredentialsException("Sorry, You're not authorized to access this resource.");
         }
-        JwtRefreshToken refreshToken = jwtTokenService.findByAccessToken(token);
+        JwtRefreshTokenEntity refreshToken = jwtTokenService.findByAccessToken(token);
 
         if (refreshToken!=null) {
         	tokenProvider.invalidateToken(refreshToken);
