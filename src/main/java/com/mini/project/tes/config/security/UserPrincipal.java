@@ -34,11 +34,12 @@ public class UserPrincipal implements UserDetails {
     }
     public static UserPrincipal create(SamUserEntity user) {
 
-        return new UserPrincipal(
-                user.getId(),
-                user.getUsername(),
-                user.getPassword(),
-                authorities);
+//        return new UserPrincipal(
+//                user.getId(),
+//                user.getUsername(),
+//                user.getPassword(),
+//                authorities);
+        return new UserPrincipal(user);
 
     }
 

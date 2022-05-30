@@ -37,16 +37,6 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
-    public String generateTokenForEngine(UserDetails userPrincipal) {
-        Date now = new Date();
-        Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(userPrincipal.getUsername())
-                .setIssuedAt(new Date())
-//                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
-    }
     public String generateRefreshToken() {
         // generate a random UUID as refresh token
         return UUID.randomUUID().toString();

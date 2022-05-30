@@ -109,7 +109,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         //=======================================================================================//
 
         jwtService.saveRefreshToken(userPrincipal, refreshToken, isExist, accessToken);
-
+        jwtAuthenticationResponse = new JwtAuthenticationResponse(accessToken, refreshToken);
 
         return jwtAuthenticationResponse;
     }
@@ -195,7 +195,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         public Object getPrincipal() {
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             //TODO authority
-            //UserPrincipal userprincipal = new UserPrincipal(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities, loginRequest.getLoginIp(), loginRequest.getWorkGroup());
+//            UserPrincipal userprincipal = new UserPrincipal(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities, loginRequest.getLoginIp(), loginRequest.getWorkGroup());
             return UserPrincipal.create(user);
         }
 

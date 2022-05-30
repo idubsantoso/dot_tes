@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class MovieListAssembler {
+    @Autowired
     private ModelMapper modelMapper;
 
     public MovieList convertToDto(MovieListEntity entity){

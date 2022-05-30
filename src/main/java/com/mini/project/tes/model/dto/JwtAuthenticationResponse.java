@@ -8,9 +8,6 @@ public class JwtAuthenticationResponse {
     public JwtAuthenticationResponse() {
     }
 
-    public JwtAuthenticationResponse(String accessToken, String refreshToken, Long expiresInMsec, String role, String accessMenu, String eligibleChannel, String eligibleMerchantType) {
-
-    }
     public JwtAuthenticationResponse(String accessToken, String refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
