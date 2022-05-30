@@ -1,15 +1,7 @@
 package com.mini.project.tes.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-/**
- * @author Winner [Alpabit]
- *
- * Dec 4, 2019
- */
-@Getter
-@Setter
 public class ApiResponse {
     private Boolean success;
     private String message;

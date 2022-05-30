@@ -1,8 +1,6 @@
 package com.mini.project.tes.model.entity;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -13,8 +11,6 @@ import java.util.Date;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 @Entity
-@Getter
-@Setter
 @Data
 @Table(name = "jwt_refresh_token")
 public class JwtRefreshTokenEntity {

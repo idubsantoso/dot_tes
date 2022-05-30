@@ -4,14 +4,20 @@ import com.mini.project.tes.model.entity.DetailsMovieEntity;
 import com.mini.project.tes.model.entity.MovieListEntity;
 import com.mini.project.tes.repository.DetailsMovieRepository;
 import com.mini.project.tes.service.DetailsMovieService;
+import com.mini.project.tes.service.MovieListService;
 import com.mini.project.tes.service.error.ServiceException;
 import com.mini.project.tes.util.LogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Transactional
@@ -19,6 +25,8 @@ import java.util.List;
 public class DetailsMovieServiceImpl implements DetailsMovieService {
     @Autowired
     private DetailsMovieRepository repo;
+    @Autowired
+    private MovieListService movieListService;
     @Autowired
     private LogUtil logUtil;
 
@@ -57,6 +65,31 @@ public class DetailsMovieServiceImpl implements DetailsMovieService {
         } catch (Exception e) {
             log.error("Error save in "  + this.getClass().getName() + " :" + e.getMessage());
             throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public MovieListEntity uploadFile(String uploadDir, MultipartFile file,MovieListEntity result) throws IOException {
+        DetailsMovieEntity detailsMovieEntity=new DetailsMovieEntity();
+        StringBuilder fileNames=new StringBuilder();
+        try {
+            Path fileNamePath = Paths.get(uploadDir, file.getOriginalFilename());
+            fileNames.append(file.getOriginalFilename());
+            Files.write(fileNamePath, file.getBytes());
+//            movieListEntity=assembler.convertToEntity(movieList);
+            detailsMovieEntity.setUrl(fileNamePath.toString());
+            detailsMovieEntity.setBytes(file.getBytes());
+            detailsMovieEntity.setFileName(file.getOriginalFilename());
+//            detailsMovieEntity.getType(file.getContentType());
+
+            result = movieListService.save(result);
+            detailsMovieEntity.setMovieList(result);
+            detailsMovieEntity.setCreatedDate(result.getCreatedDate());
+            save(detailsMovieEntity);
+            logUtil.success(this.getClass().getName() +" [Save - upload]", "id: " + detailsMovieEntity.getId());
+            return result;
+        }catch (Exception e) { log.error("Error upload in "  + this.getClass().getName() + " :" + e.getMessage());
+                throw new ServiceException(e.getMessage());
         }
     }
 }

@@ -1,15 +1,13 @@
 package com.mini.project.tes.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
 @Data
 @Table(name = "MOVIE_LIST")
 public class MovieListEntity extends Auditable<String> {

@@ -141,24 +141,11 @@ public class MovieListRest {
 
     @PostMapping(value = "/movie-lists/upload-file", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Object> uploadFile(@RequestPart("file") MultipartFile file,@RequestPart("movieList") String movieListJson ) throws Exception {
-        DetailsMovieEntity detailsMovieEntity=new DetailsMovieEntity();
+
         MovieListEntity result=new MovieListEntity();
-        StringBuilder fileNames=new StringBuilder();
         MovieListEntity movieListEntity= ObjectMapperUtil.toObject(movieListJson, MovieListEntity.class);
         try {
-            Path fileNamePath = Paths.get(uploadDir, file.getOriginalFilename());
-            fileNames.append(file.getOriginalFilename());
-            Files.write(fileNamePath, file.getBytes());
-//            movieListEntity=assembler.convertToEntity(movieList);
-            detailsMovieEntity.setUrl(fileNamePath.toString());
-            detailsMovieEntity.setBytes(file.getBytes());
-            detailsMovieEntity.setFileName(file.getOriginalFilename());
-//            detailsMovieEntity.getType(file.getContentType());
-
-            result=service.save(movieListEntity);
-            detailsMovieEntity.setMovieList(result);
-            detailsMovieEntity.setCreatedDate(result.getCreatedDate());
-            detailsMovieService.save(detailsMovieEntity);
+            result=detailsMovieService.uploadFile(uploadDir,file,movieListEntity);
 
         } catch (Exception e){
             logUtil.error(this.getClass().getName() + " [post]", e.getMessage());

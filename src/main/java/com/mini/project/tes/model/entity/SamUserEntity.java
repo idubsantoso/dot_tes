@@ -1,8 +1,6 @@
 package com.mini.project.tes.model.entity;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -17,8 +15,6 @@ import java.util.Set;
  * 
  */
 @Entity
-@Getter
-@Setter
 @Data
 @Table(name="sam_user")
 public class SamUserEntity implements Serializable {
