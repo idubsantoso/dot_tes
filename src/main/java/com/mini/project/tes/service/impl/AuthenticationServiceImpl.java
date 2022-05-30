@@ -2,6 +2,7 @@ package com.mini.project.tes.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mini.project.tes.config.security.*;
+import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import com.mini.project.tes.model.entity.SamUserEntity;
 import com.mini.project.tes.repository.SamUserRepository;
 import com.mini.project.tes.exception.InvalidTokenExeption;
@@ -89,7 +90,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         UserPrincipal userPrincipal = (UserPrincipal) auth.getPrincipal();
         String accessToken = tokenProvider.generateToken(userPrincipal);
         //check if tokenRefresh Exist
-        JwtRefreshToken isExist = jwtTokenService.findByUserId(userPrincipal.getId());
+        JwtRefreshTokenEntity isExist = jwtTokenService.findByUserId(userPrincipal.getId());
 
 
         if (isExist == null) {
@@ -103,7 +104,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setLastLogIn(new Date());
         user.setLoginAttempt(0);
         samUserService.save(user);
-        user.setPassword(baseHelper.encrypt(loginRequest.getPassword()));
+//        user.setPassword(baseHelper.encrypt(loginRequest.getPassword()));
 
         //=======================================================================================//
 
@@ -137,9 +138,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtAuthenticationResponse refreshAccessToken(String refreshToken, String ipAddress, String remoteHost) throws JsonProcessingException {
-        JwtRefreshToken jwtRefreshToken = null;
+        JwtRefreshTokenEntity jwtRefreshToken = null;
 
-        Optional<JwtRefreshToken> optionalJwtRefreshToken = jwtTokenService.findById(refreshToken);
+        Optional<JwtRefreshTokenEntity> optionalJwtRefreshToken = jwtTokenService.findById(refreshToken);
         if(!optionalJwtRefreshToken.isPresent()){
             throw new InvalidTokenExeption("Refresh token is invalid");
         } else{

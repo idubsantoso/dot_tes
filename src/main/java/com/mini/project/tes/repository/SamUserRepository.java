@@ -13,11 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * @author Winner [Alpabit]
- *
- * Dec 18, 2019
- */
 @RepositoryRestResource
 @Repository
 public interface SamUserRepository extends JpaRepository<SamUserEntity, Long>, JpaSpecificationExecutor<SamUserEntity> {

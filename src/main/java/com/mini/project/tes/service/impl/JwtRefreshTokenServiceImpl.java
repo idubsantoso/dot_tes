@@ -1,6 +1,5 @@
 package com.mini.project.tes.service.impl;
 
-import com.mini.project.tes.assembler.JwtRefreshTokenAssembler;
 import com.mini.project.tes.model.dto.JwtRefreshToken;
 import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import com.mini.project.tes.repository.JwtRefreshTokenRepository;
@@ -21,40 +20,38 @@ public class JwtRefreshTokenServiceImpl implements JwtRefreshTokenService {
 	@Autowired
 	private JwtRefreshTokenRepository repo;
 
-	@Autowired
-	private JwtRefreshTokenAssembler assembler;
-
 	@Override
-	public JwtRefreshToken findByUserId(long userId) {
+	public JwtRefreshTokenEntity findByUserId(long userId) {
 		try {
-			return assembler.convertToDto(repo.findByUserId(userId)) ;
+			return repo.findByUserId(userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 	@Override
-	public Optional<JwtRefreshToken> findById(String id) {
+	public Optional<JwtRefreshTokenEntity> findById(String id) {
 		try {
 			Optional<JwtRefreshTokenEntity> jwtRefreshTokenEntity = repo.findById(id);
-			Optional<JwtRefreshToken> jwtRefreshToken = jwtRefreshTokenEntity.isPresent() ? Optional.of( assembler.convertToDto(jwtRefreshTokenEntity.get())) : Optional.empty();
-			return jwtRefreshToken;
+//			Optional<JwtRefreshToken> jwtRefreshToken = jwtRefreshTokenEntity.isPresent() ? Optional.of( assembler.convertToDto(jwtRefreshTokenEntity.get())) : Optional.empty();
+			return jwtRefreshTokenEntity;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 	@Override
-	public JwtRefreshToken saveJwt(JwtRefreshToken jwt) {
+	public JwtRefreshTokenEntity saveJwt(JwtRefreshTokenEntity jwt) {
 		try {
-			return assembler.convertToDto(repo.save(assembler.convertToEntity(jwt)));
+			JwtRefreshTokenEntity entity=repo.save(jwt);
+			return entity;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 	@Override
-	public boolean deleteJwt(JwtRefreshToken jwt) {
+	public boolean deleteJwt(JwtRefreshTokenEntity jwt) {
 		try {
 			repo.deleteById(jwt.getToken());
 			return true;
@@ -74,9 +71,9 @@ public class JwtRefreshTokenServiceImpl implements JwtRefreshTokenService {
         }
 	}
 	@Override
-	public JwtRefreshToken findByAccessToken(String token) {
+	public JwtRefreshTokenEntity findByAccessToken(String token) {
 		try {
-			return assembler.convertToDto(repo.findByAccessToken(token)) ;
+			return repo.findByAccessToken(token);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

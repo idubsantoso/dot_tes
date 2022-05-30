@@ -1,6 +1,7 @@
 package com.mini.project.tes.service.impl;
 
 
+import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import com.mini.project.tes.repository.SamUserRepository;
 import com.mini.project.tes.config.security.UserPrincipal;
 import com.mini.project.tes.model.dto.JwtRefreshToken;
@@ -25,7 +26,7 @@ public class JwtServiceImpl implements JwtService {
     JwtRefreshTokenService jwtTokenService;
 
     @Override
-    public boolean saveRefreshToken(UserPrincipal userPrincipal, String refreshToken, JwtRefreshToken isExist, String accessToken) {
+    public boolean saveRefreshToken(UserPrincipal userPrincipal, String refreshToken, JwtRefreshTokenEntity isExist, String accessToken) {
     	Date today = new Date();
         if(isExist!=null) {
         	jwtTokenService.deleteJwt(isExist);
@@ -34,7 +35,7 @@ public class JwtServiceImpl implements JwtService {
             jwtTokenService.saveJwt(isExist);
         }
         else {
-            JwtRefreshToken jwtRefreshToken = new JwtRefreshToken(refreshToken);
+            JwtRefreshTokenEntity jwtRefreshToken = new JwtRefreshTokenEntity(refreshToken);
             jwtRefreshToken.setAccessToken(accessToken);
             jwtRefreshToken.setCreatedDate(today);
             jwtRefreshToken.setUser(samUserService.getById(userPrincipal.getId()));

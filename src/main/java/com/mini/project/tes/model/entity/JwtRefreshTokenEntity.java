@@ -10,7 +10,7 @@ import java.util.Date;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 @Entity
-@Table(name = "session_user")
+@Table(name = "jwt_refresh_token")
 public class JwtRefreshTokenEntity {
 	@Id
     private String token;

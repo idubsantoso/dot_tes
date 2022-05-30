@@ -6,10 +6,10 @@ import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import java.util.Optional;
 
 public interface JwtRefreshTokenService {
-	public JwtRefreshToken findByUserId(long userId);
+	public JwtRefreshTokenEntity findByUserId(long userId);
 	public JwtRefreshTokenEntity findByUserIdAndAccessToken(Long userId, String accessToken);
-	public Optional<JwtRefreshToken> findById(String id);
-	public JwtRefreshToken saveJwt(JwtRefreshToken jwt);
-	public boolean deleteJwt(JwtRefreshToken jwt);
-	public JwtRefreshToken findByAccessToken(String accessToken);
+	public Optional<JwtRefreshTokenEntity> findById(String id);
+	JwtRefreshTokenEntity saveJwt(JwtRefreshTokenEntity jwt);
+	public boolean deleteJwt(JwtRefreshTokenEntity jwt);
+	public JwtRefreshTokenEntity findByAccessToken(String accessToken);
 }
