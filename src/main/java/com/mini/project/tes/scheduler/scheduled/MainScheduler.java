@@ -20,13 +20,8 @@ public class MainScheduler {
     @Autowired
     private MovieListService service;
 
-
     @Value("${dot.jobs.scheduleJob.enable}")
     private boolean scheduleJobEnable;
-
-    @Qualifier("prepareTaskExecutor")
-    @Autowired
-    private TaskExecutor taskExecutor;
 
 
 //    @Scheduled(cron= "${recurring.jobs.autoScheduleJob.schedule}")

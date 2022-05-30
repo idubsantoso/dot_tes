@@ -130,4 +130,44 @@ public class TechnicalTesRest {
 
     }
 
+    @GetMapping(value = "/get-external/request-themoviedb")
+    public ResponseEntity<Object> getMovieExternalAPI() throws IOException, URISyntaxException {
+        log.info("REST Request to MyGETRequestGetAll");
+        URL urlForGetRequest = new URL("https://api.themoviedb.org/3/movie/550");
+        String readLine = null;
+        StringBuilder response = new StringBuilder();
+        HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
+//        conection.setRequestProperty("id", "12");
+        conection.setRequestProperty("api_key", "95467e28a39b346de61f7c8f8f3f6cea");
+        int responseCode = conection.getResponseCode();
+        try {
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(conection.getInputStream()));
+
+                while ((readLine = in.readLine()) != null) {
+                    response.append(readLine);
+                }
+                in.close();
+                // print result
+                System.out.println("JSON String Result " + response.toString());
+                //GetAndPost.POSTRequest(response.toString());
+//                RajaOngkir rajaOngkir= ObjectMapperUtil.toObject(response.toString(),RajaOngkir.class);
+                CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.MINUTES);
+                return ResponseEntity.ok()
+                        .cacheControl(cacheControl)
+                        .body(response.toString());
+            } else {
+                return new ResponseEntity(new ApiResponse(false, "Connection Failed"),
+                        HttpStatus.BAD_REQUEST);
+            }
+
+        }catch (Exception e){
+            log.error("Error in MyGETRequest2");
+            throw (URISyntaxException)new URISyntaxException(e.toString(),"Error MyGETRequest2").initCause(e);
+        }
+
+    }
+
 }
