@@ -28,9 +28,6 @@ import java.util.Hashtable;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationRest {
-    @Value("${recurring.login.max-attempt}")
-    private Integer maxLoginAttempt;
-
 
     @Autowired
     AuthenticationManager authenticationManager;
