@@ -133,12 +133,12 @@ public class TechnicalTesRest {
     @GetMapping(value = "/get-external/request-themoviedb")
     public ResponseEntity<Object> getMovieExternalAPI() throws IOException, URISyntaxException {
         log.info("REST Request to MyGETRequestGetAll");
-        URL urlForGetRequest = new URL("https://api.themoviedb.org/3/movie/550");
+        URL urlForGetRequest = new URL("https://api.themoviedb.org/3/movie/550?api_key=95467e28a39b346de61f7c8f8f3f6cea");
         String readLine = null;
         StringBuilder response = new StringBuilder();
         HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
 //        conection.setRequestProperty("id", "12");
-        conection.setRequestProperty("api_key", "95467e28a39b346de61f7c8f8f3f6cea");
+//        conection.setRequestProperty("api_key", "95467e28a39b346de61f7c8f8f3f6cea");
         int responseCode = conection.getResponseCode();
         try {
 

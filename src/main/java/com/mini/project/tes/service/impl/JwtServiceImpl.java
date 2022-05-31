@@ -29,7 +29,7 @@ public class JwtServiceImpl implements JwtService {
     public boolean saveRefreshToken(UserPrincipal userPrincipal, String refreshToken, JwtRefreshTokenEntity isExist, String accessToken) {
     	Date today = new Date();
         if(isExist!=null) {
-        	jwtTokenService.deleteJwt(isExist);
+//        	jwtTokenService.deleteJwt(isExist);
             isExist.setAccessToken(accessToken);
             isExist.setCreatedDate(today);
             isExist.setUser(samUserService.getById(userPrincipal.getId()));
