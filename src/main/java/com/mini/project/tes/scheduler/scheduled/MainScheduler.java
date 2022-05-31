@@ -23,12 +23,23 @@ public class MainScheduler {
     @Value("${dot.jobs.scheduleJob.enable}")
     private boolean scheduleJobEnable;
 
+    @Value("${dot.jobs.externalApi.enable}")
+    private boolean externalApi;
 
-//    @Scheduled(cron= "${recurring.jobs.autoScheduleJob.schedule}")
+
+    //    @Scheduled(cron= "${recurring.jobs.autoScheduleJob.schedule}")
     @Scheduled(fixedDelayString="${dot.jobs.scheduleJob.fixedRate}", zone="${dot.jobs.scheduleJob.zone}")
-    public void scheduleAuto() {
+    public void scheduleDelete() {
         if (scheduleJobEnable){
             log.info("run schedule job");
+            service.jobDelete();
+        }
+    }
+//    @Scheduled(fixedDelayString="${dot.jobs.externalApi.fixedRate}", zone="${dot.jobs.externalApi.zone}")
+    @Scheduled(cron= "${dot.jobs.externalApi.schedule}", zone="${dot.jobs.externalApi.zone}")
+    public void scheduleExternalApis() {
+        if (externalApi){
+            log.info("run schedule external api");
             service.jobDelete();
         }
     }

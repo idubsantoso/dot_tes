@@ -29,6 +29,7 @@ public class DetailsMovieServiceImpl implements DetailsMovieService {
     private MovieListService movieListService;
     @Autowired
     private LogUtil logUtil;
+    private Thread thread;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -70,6 +71,26 @@ public class DetailsMovieServiceImpl implements DetailsMovieService {
 
     @Override
     public MovieListEntity uploadFile(String uploadDir, MultipartFile file,MovieListEntity result) throws IOException {
+        result = movieListService.save(result);
+            MovieListEntity finalResult=result;
+            thread = new Thread(() -> {
+//                System.out.println("Thread Running");
+                try {
+                    thread(uploadDir,file,finalResult);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    log.error("Error upload in "  + this.getClass().getName() + " :" + e.getMessage());
+                    throw new ServiceException(e.getMessage());
+                }
+            });
+
+            thread.start();
+
+
+            logUtil.success(this.getClass().getName() +" [Save - upload]", "id: " + result.getId());
+            return result;
+    }
+    private void thread(String uploadDir, MultipartFile file,MovieListEntity result) throws IOException {
         DetailsMovieEntity detailsMovieEntity=new DetailsMovieEntity();
         StringBuilder fileNames=new StringBuilder();
         try {
@@ -82,14 +103,14 @@ public class DetailsMovieServiceImpl implements DetailsMovieService {
             detailsMovieEntity.setFileName(file.getOriginalFilename());
 //            detailsMovieEntity.getType(file.getContentType());
 
-            result = movieListService.save(result);
+
             detailsMovieEntity.setMovieList(result);
             detailsMovieEntity.setCreatedDate(result.getCreatedDate());
             save(detailsMovieEntity);
-            logUtil.success(this.getClass().getName() +" [Save - upload]", "id: " + detailsMovieEntity.getId());
-            return result;
-        }catch (Exception e) { log.error("Error upload in "  + this.getClass().getName() + " :" + e.getMessage());
-                throw new ServiceException(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Error upload in "  + this.getClass().getName() + " :" + e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 }
