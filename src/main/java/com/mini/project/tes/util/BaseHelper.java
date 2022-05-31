@@ -9,11 +9,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * @author Winner [Alpabit]
- *
- * Dec 3, 2019
- */
 public class BaseHelper implements PasswordEncoder {
 	public BaseHelper() {
 	}

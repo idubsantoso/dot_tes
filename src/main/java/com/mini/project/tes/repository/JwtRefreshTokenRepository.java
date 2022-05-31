@@ -1,10 +1,5 @@
 package com.mini.project.tes.repository;
 
-/**
- * @author Winner [Alpabit]
- *
- * Dec 4, 2019
- */
 
 import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
