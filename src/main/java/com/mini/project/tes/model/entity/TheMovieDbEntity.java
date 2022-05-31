@@ -3,6 +3,7 @@ package com.mini.project.tes.model.entity;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,12 +12,14 @@ import java.util.Date;
 @Data
 @Table(name = "the_movie_db")
 public class TheMovieDbEntity {
+    @Id
+    private Integer id;
     private boolean adult;
     private String backdrop_path;
     private String belongs_to_collection;
+    private BigDecimal budget;
     private String genres;
     private String homepage;
-    private Integer id;
     private String imdb_id;
     private String original_language;
     private String original_title;

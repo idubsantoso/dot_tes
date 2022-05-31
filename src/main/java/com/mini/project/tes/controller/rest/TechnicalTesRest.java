@@ -1,8 +1,14 @@
 package com.mini.project.tes.controller.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mini.project.tes.model.dto.RajaOngkir;
 import com.mini.project.tes.model.entity.ApiResponse;
+import com.mini.project.tes.model.entity.TheMovieDbEntity;
 import com.mini.project.tes.util.ObjectMapperUtil;
+import net.minidev.json.JSONArray;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -21,6 +27,8 @@ import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -152,6 +160,19 @@ public class TechnicalTesRest {
                 in.close();
                 // print result
                 System.out.println("JSON String Result " + response.toString());
+//                String tes=response.toString().replaceAll("]","");
+//                tes.replaceAll("[^0-9]","");
+                ObjectMapper mapper = new ObjectMapper();
+                Map<String,Object> map = mapper.readValue(response.toString(), Map.class);
+
+                Gson g = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonObject object = (JsonObject) parser.parse(response.toString());
+                object.remove("genres");
+                object.remove("production_companies");
+                object.remove("production_countries");
+                object.remove("spoken_languages");
+                TheMovieDbEntity s = g.fromJson(object, TheMovieDbEntity.class);
                 //GetAndPost.POSTRequest(response.toString());
 //                RajaOngkir rajaOngkir= ObjectMapperUtil.toObject(response.toString(),RajaOngkir.class);
                 CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.MINUTES);

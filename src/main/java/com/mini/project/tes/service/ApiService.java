@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface ApiService {
-    ResponseEntity<String> schedule() throws IOException, URISyntaxException;
+    void schedule() throws IOException, URISyntaxException;
 }
