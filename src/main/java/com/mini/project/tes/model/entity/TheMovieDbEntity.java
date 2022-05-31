@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Date;
 public class TheMovieDbEntity {
     @Id
     private Integer id;
-    private boolean adult;
+    private Boolean adult;
     private String backdrop_path;
     private String belongs_to_collection;
     private BigDecimal budget;
@@ -23,6 +24,7 @@ public class TheMovieDbEntity {
     private String imdb_id;
     private String original_language;
     private String original_title;
+    @Lob
     private String overview;
     private BigDecimal popularity;
     private String poster_path;

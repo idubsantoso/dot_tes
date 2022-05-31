@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import com.mini.project.tes.model.dto.RajaOngkir;
 import com.mini.project.tes.model.entity.ApiResponse;
 import com.mini.project.tes.model.entity.TheMovieDbEntity;
+import com.mini.project.tes.service.ApiService;
 import com.mini.project.tes.util.ObjectMapperUtil;
 import net.minidev.json.JSONArray;
 import okhttp3.OkHttpClient;
@@ -14,6 +15,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,8 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/api")
 @CrossOrigin("*")
 public class TechnicalTesRest {
+    @Autowired
+    private ApiService service;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping(value = "/get-external")
@@ -173,6 +177,63 @@ public class TechnicalTesRest {
                 object.remove("production_countries");
                 object.remove("spoken_languages");
                 TheMovieDbEntity s = g.fromJson(object, TheMovieDbEntity.class);
+                service.save(s);
+                //GetAndPost.POSTRequest(response.toString());
+//                RajaOngkir rajaOngkir= ObjectMapperUtil.toObject(response.toString(),RajaOngkir.class);
+                CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.MINUTES);
+                return ResponseEntity.ok()
+                        .cacheControl(cacheControl)
+                        .body(response.toString());
+            } else {
+                return new ResponseEntity(new ApiResponse(false, "Connection Failed"),
+                        HttpStatus.BAD_REQUEST);
+            }
+
+        }catch (Exception e){
+            log.error("Error in getMovieExternalAPI");
+            throw (URISyntaxException)new URISyntaxException(e.toString(),"Error MyGETRequest2").initCause(e);
+        }
+
+    }
+
+    @GetMapping(value = "/get-external/request-themoviedb/{id}/{api_key}")
+    public ResponseEntity<Object> getMovieExternalAPIByIdAndApiKey(@PathVariable("id") String id,@PathVariable("api_key") String api_key) throws IOException, URISyntaxException {
+        log.info("REST Request to getMovieExternalAPI");
+        String build = "https://api.themoviedb.org/3/movie/" + id +
+                "?api_key=" + api_key;
+        URL urlForGetRequest = new URL(build);
+        String readLine = null;
+        StringBuilder response = new StringBuilder();
+        HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
+//        conection.setRequestProperty("id", "12");
+//        conection.setRequestProperty("api_key", "95467e28a39b346de61f7c8f8f3f6cea");
+        int responseCode = conection.getResponseCode();
+        try {
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(conection.getInputStream()));
+
+                while ((readLine = in.readLine()) != null) {
+                    response.append(readLine);
+                }
+                in.close();
+                // print result
+                System.out.println("JSON String Result " + response.toString());
+//                String tes=response.toString().replaceAll("]","");
+//                tes.replaceAll("[^0-9]","");
+                ObjectMapper mapper = new ObjectMapper();
+                Map<String,Object> map = mapper.readValue(response.toString(), Map.class);
+
+                Gson g = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonObject object = (JsonObject) parser.parse(response.toString());
+                object.remove("genres");
+                object.remove("production_companies");
+                object.remove("production_countries");
+                object.remove("spoken_languages");
+                TheMovieDbEntity s = g.fromJson(object, TheMovieDbEntity.class);
+                service.save(s);
                 //GetAndPost.POSTRequest(response.toString());
 //                RajaOngkir rajaOngkir= ObjectMapperUtil.toObject(response.toString(),RajaOngkir.class);
                 CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.MINUTES);

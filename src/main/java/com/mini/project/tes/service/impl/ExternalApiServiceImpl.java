@@ -4,9 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mini.project.tes.model.entity.ApiResponse;
+import com.mini.project.tes.model.entity.DetailsMovieEntity;
 import com.mini.project.tes.model.entity.TheMovieDbEntity;
 import com.mini.project.tes.repository.TheMovieDbRepository;
 import com.mini.project.tes.service.ApiService;
+import com.mini.project.tes.service.error.ServiceException;
+import com.mini.project.tes.util.LogUtil;
 import com.mini.project.tes.util.ObjectMapperUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,9 +28,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+@Transactional
+@Service
 public class ExternalApiServiceImpl implements ApiService {
     @Autowired
     private TheMovieDbRepository repo;
+    @Autowired
+    private LogUtil logUtil;
+
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     @Override
     public void schedule() throws IOException, URISyntaxException {
@@ -67,4 +77,17 @@ public class ExternalApiServiceImpl implements ApiService {
             throw (URISyntaxException)new URISyntaxException(e.toString(),"Error MyGETRequest2").initCause(e);
         }
     }
+
+    @Override
+    public TheMovieDbEntity save(TheMovieDbEntity detailsMovieEntity) {
+        try {
+            TheMovieDbEntity entity = repo.saveAndFlush(detailsMovieEntity);
+            logUtil.success(this.getClass().getName() +" [Save]", "id: " + detailsMovieEntity.getId());
+            return entity;
+        } catch (Exception e) {
+            log.error("Error save in "  + this.getClass().getName() + " :" + e.getMessage());
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
 }
