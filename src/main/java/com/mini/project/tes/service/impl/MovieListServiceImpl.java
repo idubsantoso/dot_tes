@@ -10,6 +10,7 @@ import com.mini.project.tes.service.MovieListService;
 import com.mini.project.tes.repository.MovieListRepository;
 import com.mini.project.tes.service.error.ServiceException;
 import com.mini.project.tes.util.LogUtil;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Stream;
 
+@AllArgsConstructor
 @Transactional
 @Service
 public class MovieListServiceImpl implements MovieListService {
@@ -41,6 +43,9 @@ public class MovieListServiceImpl implements MovieListService {
     private LogUtil logUtil;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    public MovieListServiceImpl(MovieListRepository repo) {
+    }
 
 
 //    public MovieListServiceImpl(FileStorageProperties fileStorageProperties) throws FileStorageException {
