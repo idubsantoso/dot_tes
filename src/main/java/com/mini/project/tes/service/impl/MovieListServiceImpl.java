@@ -31,22 +31,15 @@ import java.util.stream.Stream;
 @Transactional
 @Service
 public class MovieListServiceImpl implements MovieListService {
-    private Path fileStorageLocation;
 
     @Autowired
     private final MovieListRepository repo;
 
-    @Autowired
-    private DetailsMovieRepository detailsMovieRepository;
-
-    @Autowired
-    private LogUtil logUtil;
+//    @Autowired
+//    private LogUtil logUtil;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public MovieListServiceImpl(MovieListRepository repo) {
-        this.repo=repo;
-    }
 
 //    public MovieListServiceImpl(MovieListRepository repo) {
 //    }
@@ -100,7 +93,7 @@ public class MovieListServiceImpl implements MovieListService {
     public MovieListEntity save(MovieListEntity movieListEntity) {
         try {
             MovieListEntity entity = repo.save(movieListEntity);
-            logUtil.success(this.getClass().getName() +" [Save]", "id: " + movieListEntity.getId());
+//            logUtil.success(this.getClass().getName() +" [Save]", "id: " + movieListEntity.getId());
 
             return entity;
         } catch (Exception e) {
@@ -119,7 +112,7 @@ public class MovieListServiceImpl implements MovieListService {
             entity.setRate(movieListEntity.getRate());
 
             MovieListEntity entityResult = repo.saveAndFlush(entity);
-            logUtil.success(this.getClass().getName() +" [Update]", "id: " + entity.getId());
+//            logUtil.success(this.getClass().getName() +" [Update]", "id: " + entity.getId());
             return entityResult;
         } catch (Exception e) {
             log.error("Error update in " + this.getClass().getName() + " :" + e.getMessage());
@@ -132,7 +125,7 @@ public class MovieListServiceImpl implements MovieListService {
     public void delete(MovieListEntity movieListEntity) {
         try {
             repo.deleteById(movieListEntity.getId());
-            logUtil.success(this.getClass().getName() +" [Delete]", "id: " + movieListEntity.getId());
+//            logUtil.success(this.getClass().getName() +" [Delete]", "id: " + movieListEntity.getId());
         } catch (Exception e) {
             log.info("Error delete in " + this.getClass().getName() + " :" + e.getMessage());
         }
