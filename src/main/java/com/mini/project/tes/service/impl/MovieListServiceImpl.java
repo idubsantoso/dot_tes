@@ -34,7 +34,7 @@ public class MovieListServiceImpl implements MovieListService {
     private Path fileStorageLocation;
 
     @Autowired
-    private MovieListRepository repo;
+    private final MovieListRepository repo;
 
     @Autowired
     private DetailsMovieRepository detailsMovieRepository;
@@ -45,7 +45,11 @@ public class MovieListServiceImpl implements MovieListService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public MovieListServiceImpl(MovieListRepository repo) {
+        this.repo=repo;
     }
+
+//    public MovieListServiceImpl(MovieListRepository repo) {
+//    }
 
 
 //    public MovieListServiceImpl(FileStorageProperties fileStorageProperties) throws FileStorageException {
@@ -95,7 +99,7 @@ public class MovieListServiceImpl implements MovieListService {
     @Override
     public MovieListEntity save(MovieListEntity movieListEntity) {
         try {
-            MovieListEntity entity = repo.saveAndFlush(movieListEntity);
+            MovieListEntity entity = repo.save(movieListEntity);
             logUtil.success(this.getClass().getName() +" [Save]", "id: " + movieListEntity.getId());
 
             return entity;

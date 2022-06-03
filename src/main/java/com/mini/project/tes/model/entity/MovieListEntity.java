@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "MOVIE_LIST")
@@ -26,6 +27,6 @@ public class MovieListEntity extends Auditable<String> {
     @Column(name = "DETAILS", nullable = true)
     private String details;
 
-
-
+    public MovieListEntity() {
+    }
 }
