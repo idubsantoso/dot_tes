@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RepositoryRestResource
-public interface TheMovieDbRepository extends JpaRepository<TheMovieDbEntity, Long> {
+public interface TheMovieDbRepository extends JpaRepository<TheMovieDbEntity, Integer> {
 }
