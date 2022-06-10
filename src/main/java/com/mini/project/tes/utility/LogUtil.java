@@ -1,7 +1,7 @@
 package com.mini.project.tes.utility;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mini.project.tes.model.entity.LogTableEntity;
+import com.mini.project.tes.domain.LogTableEntity;
 import com.mini.project.tes.persistence.service.LogTableService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

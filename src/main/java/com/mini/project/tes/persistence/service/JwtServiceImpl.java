@@ -1,9 +1,9 @@
 package com.mini.project.tes.persistence.service;
 
 
-import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
+import com.mini.project.tes.domain.JwtRefreshTokenEntity;
 import com.mini.project.tes.persistence.repository.SamUserRepository;
-import com.mini.project.tes.config.security.UserPrincipal;
+import com.mini.project.tes.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

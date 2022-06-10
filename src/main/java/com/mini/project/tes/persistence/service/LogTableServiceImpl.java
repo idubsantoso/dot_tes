@@ -1,6 +1,6 @@
 package com.mini.project.tes.persistence.service;
 
-import com.mini.project.tes.model.entity.LogTableEntity;
+import com.mini.project.tes.domain.LogTableEntity;
 import com.mini.project.tes.persistence.repository.LogTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

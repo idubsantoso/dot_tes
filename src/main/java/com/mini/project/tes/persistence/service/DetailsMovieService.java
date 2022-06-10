@@ -1,7 +1,7 @@
 package com.mini.project.tes.persistence.service;
 
-import com.mini.project.tes.model.entity.DetailsMovieEntity;
-import com.mini.project.tes.model.entity.MovieListEntity;
+import com.mini.project.tes.domain.DetailsMovieEntity;
+import com.mini.project.tes.domain.MovieListEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

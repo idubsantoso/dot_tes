@@ -1,7 +1,7 @@
 package com.mini.project.tes.config;
-import com.mini.project.tes.config.security.CustomUserDetailsService;
-import com.mini.project.tes.config.security.JwtAuthenticationEntryPoint;
-import com.mini.project.tes.config.security.JwtAuthenticationFilter;
+import com.mini.project.tes.security.CustomUserDetailsService;
+import com.mini.project.tes.security.JwtAuthenticationEntryPoint;
+import com.mini.project.tes.security.JwtAuthenticationFilter;
 import com.mini.project.tes.utility.BaseHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

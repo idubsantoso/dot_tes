@@ -1,6 +1,6 @@
 package com.mini.project.tes.persistence.repository;
 
-import com.mini.project.tes.config.security.entity.SamUserEntity;
+import com.mini.project.tes.security.entity.SamUserEntity;
 import com.mini.project.tes.utility.BaseHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 

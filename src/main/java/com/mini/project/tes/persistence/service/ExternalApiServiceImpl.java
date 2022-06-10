@@ -3,7 +3,7 @@ package com.mini.project.tes.persistence.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mini.project.tes.model.entity.TheMovieDbEntity;
+import com.mini.project.tes.domain.TheMovieDbEntity;
 import com.mini.project.tes.persistence.repository.TheMovieDbRepository;
 import com.mini.project.tes.persistence.service.error.ServiceException;
 import com.mini.project.tes.utility.LogUtil;

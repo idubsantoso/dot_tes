@@ -1,7 +1,6 @@
 package com.mini.project.tes.persistence.service;
 
-import com.mini.project.tes.model.entity.TheMovieDbEntity;
-import org.springframework.http.ResponseEntity;
+import com.mini.project.tes.domain.TheMovieDbEntity;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

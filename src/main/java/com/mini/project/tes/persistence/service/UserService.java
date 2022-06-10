@@ -1,6 +1,6 @@
 package com.mini.project.tes.persistence.service;
 
-import com.mini.project.tes.config.security.entity.SamUserEntity;
+import com.mini.project.tes.security.entity.SamUserEntity;
 
 import java.util.List;
 

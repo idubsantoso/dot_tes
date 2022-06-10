@@ -1,6 +1,6 @@
 package com.mini.project.tes.persistence.service;
 
-import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
+import com.mini.project.tes.domain.JwtRefreshTokenEntity;
 import com.mini.project.tes.persistence.repository.JwtRefreshTokenRepository;
 import com.mini.project.tes.persistence.service.error.ServiceException;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package com.mini.project.tes.persistence.repository;
 
-import com.mini.project.tes.model.entity.LogTableEntity;
+import com.mini.project.tes.domain.LogTableEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

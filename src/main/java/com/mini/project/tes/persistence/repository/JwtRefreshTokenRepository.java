@@ -1,7 +1,7 @@
 package com.mini.project.tes.persistence.repository;
 
 
-import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
+import com.mini.project.tes.domain.JwtRefreshTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.mini.project.tes.persistence.service.impl;
 
-import com.mini.project.tes.model.entity.MovieListEntity;
+import com.mini.project.tes.domain.MovieListEntity;
 import com.mini.project.tes.persistence.service.MovieListServiceImpl;
 import com.mini.project.tes.persistence.repository.MovieListRepository;
 import com.mini.project.tes.utility.BaseHelper;

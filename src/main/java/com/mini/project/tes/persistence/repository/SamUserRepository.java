@@ -1,6 +1,6 @@
 package com.mini.project.tes.persistence.repository;
 
-import com.mini.project.tes.config.security.entity.SamUserEntity;
+import com.mini.project.tes.security.entity.SamUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

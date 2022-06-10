@@ -1,7 +1,7 @@
 package com.mini.project.tes.assembler;
 
-import com.mini.project.tes.model.dto.MovieList;
-import com.mini.project.tes.model.entity.MovieListEntity;
+import com.mini.project.tes.domain.dto.MovieList;
+import com.mini.project.tes.domain.MovieListEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

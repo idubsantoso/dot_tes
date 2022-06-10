@@ -1,7 +1,7 @@
 package com.mini.project.tes.persistence.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mini.project.tes.model.entity.MovieListEntity;
+import com.mini.project.tes.domain.MovieListEntity;
 
 import java.util.List;
 import java.util.stream.Stream;
