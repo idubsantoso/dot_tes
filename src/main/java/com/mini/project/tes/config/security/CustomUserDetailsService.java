@@ -1,8 +1,7 @@
 package com.mini.project.tes.config.security;
 
-import com.mini.project.tes.model.entity.SamUserEntity;
-import com.mini.project.tes.repository.SamUserRepository;
-import com.mini.project.tes.model.dto.User;
+import com.mini.project.tes.config.security.entity.SamUserEntity;
+import com.mini.project.tes.persistence.repository.SamUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;

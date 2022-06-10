@@ -1,5 +1,6 @@
 package com.mini.project.tes.model.entity;
 
+import com.mini.project.tes.config.security.entity.SamUserEntity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

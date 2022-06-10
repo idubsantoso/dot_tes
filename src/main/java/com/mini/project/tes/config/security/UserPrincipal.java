@@ -1,14 +1,12 @@
 package com.mini.project.tes.config.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mini.project.tes.model.dto.User;
-import com.mini.project.tes.model.entity.SamUserEntity;
+import com.mini.project.tes.config.security.entity.SamUserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
 	private static final long serialVersionUID = 3545972395145669882L;

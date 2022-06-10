@@ -3,11 +3,14 @@ package com.mini.project.tes.controller.rest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mini.project.tes.config.security.JwtAuthenticationFilter;
 import com.mini.project.tes.config.security.JwtTokenProvider;
+import com.mini.project.tes.config.security.entity.JwtAuthenticationResponse;
+import com.mini.project.tes.config.security.entity.LoginRequest;
 import com.mini.project.tes.model.dto.*;
 import com.mini.project.tes.model.entity.ApiResponse;
+import com.mini.project.tes.persistence.service.JwtRefreshTokenService;
+import com.mini.project.tes.persistence.service.JwtService;
 import com.mini.project.tes.service.*;
-import com.mini.project.tes.service.impl.AuthenticationServiceImpl;
-import com.mini.project.tes.util.*;
+import com.mini.project.tes.persistence.service.AuthenticationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -18,12 +21,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.AuthenticationException;
-import javax.naming.Context;
-import javax.naming.directory.InitialDirContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Hashtable;
 
 @RestController
 @RequestMapping("/api/auth")

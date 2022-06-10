@@ -1,20 +1,16 @@
 package com.mini.project.tes.config.security;
 
-import com.mini.project.tes.model.dto.JwtRefreshToken;
 import com.mini.project.tes.model.entity.JwtRefreshTokenEntity;
-import com.mini.project.tes.service.JwtRefreshTokenService;
+import com.mini.project.tes.persistence.service.JwtRefreshTokenService;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Component
