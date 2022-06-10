@@ -12,7 +12,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableConfigurationProperties({com.mini.project.tes.config.file.FileStorageProperties.class})
-@EnableJpaRepositories(basePackages = "com.mini.project.tes.repository")
+@EnableJpaRepositories(basePackages = "com.mini.project.tes.persistence.repository")
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @EnableCaching
 public class TesApplication extends SpringBootServletInitializer {

@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private SamUserRepository samUserService;
+    private SamUserRepository repository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String usernameOrEmail)
             throws UsernameNotFoundException {
-        SamUserEntity user = samUserService.findByUsername(usernameOrEmail);
+        SamUserEntity user = repository.findByUsername(usernameOrEmail);
         if(user == null) {
             new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail);
         }
@@ -28,9 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserById(long id) {
         try {
-            SamUserEntity user = samUserService.getById(id);
-//            AtfUmaUserAssignment atfUmaUserAssignment = atfUmaUserAssignmentService.findByUserAndStatusActive(samUserAssembler.convertToEntity(user));
-
+            SamUserEntity user = repository.getById(id);
             return UserPrincipal.create(user);
 		} catch (Exception e) {
 			new ResourceNotFoundException("User id="+id);
