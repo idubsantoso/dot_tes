@@ -7,11 +7,6 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Winner [Alpabit]
- *
- * Oct 8, 2019
- */
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BadRequestAlertException extends RuntimeException{
 	/**
