@@ -1,5 +1,6 @@
 package com.mini.project.tes.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mini.project.tes.assembler.MovieListAssembler;
 import com.mini.project.tes.controller.error.BadRequestAlertException;
 import com.mini.project.tes.utility.HeaderUtil;
@@ -58,26 +59,14 @@ public class MovieListRest {
     @GetMapping(value = "/movie-lists")
     public ResponseEntity<Object> getAllMovieList() throws URISyntaxException {
         log.info("REST Request to get All MovieList");
-        List<MovieListEntity> movieListEntities  = null;
-        try {
-            movieListEntities  = service.findAll();
-        }catch (Exception e){
-            logUtil.error(this.getClass().getName() + " [get]", e.getMessage());
-            throw (URISyntaxException)new URISyntaxException(e.toString(),"Error getAll MovieList").initCause(e);
-        }
+        List<MovieListEntity> movieListEntities  = service.findAll();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieListEntities));
     }
 
     @GetMapping(value = "/movie-lists-category/{category}")
     public ResponseEntity<Object> getAllMovieListByCategory(@PathVariable("category") String category) throws URISyntaxException {
         log.info("REST Request to getAllMovieListByCategory");
-        List<MovieListEntity> movieListEntities  = null;
-        try {
-            movieListEntities  = service.findByCategory(category);
-        }catch (Exception e){
-            logUtil.error(this.getClass().getName() + " [get]", e.getMessage());
-            throw (URISyntaxException)new URISyntaxException(e.toString(),"Error getAllMovieListByCategory").initCause(e);
-        }
+        List<MovieListEntity> movieListEntities = service.findByCategory(category);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieListEntities));
     }
 
@@ -85,33 +74,18 @@ public class MovieListRest {
     @GetMapping(value = "/movie-lists/{id}")
     public ResponseEntity<Object> getMovieListById(@PathVariable("id") Long id) throws URISyntaxException {
         log.info("REST Request to get one MovieList " + id);
-        MovieListEntity movieListEntity = null;
-        try {
-            movieListEntity = service.findById(id);
-        }catch (Exception e){
-            logUtil.error(this.getClass().getName() + " [get]", e.getMessage());
-            throw (URISyntaxException)new URISyntaxException(e.toString(),"Error getMovieListById").initCause(e);
-        }
-        if (movieListEntity == null) {
-            return ResponseEntity.notFound().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "204", "entity doesnt exist !")).build();
-        }
+        MovieListEntity movieListEntity = service.findById(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieListEntity));
     }
 
     //Add
     @PostMapping(value = "/movie-lists")
-    public ResponseEntity<Object> addMovieList(@RequestBody @Valid MovieListEntity movieListEntity) throws URISyntaxException {
+    public ResponseEntity<Object> addMovieList(@RequestBody @Valid MovieListEntity movieListEntity) throws URISyntaxException, JsonProcessingException {
         log.info("REST Request to add MovieList " + movieListEntity.toString());
         if (movieListEntity.getId() != null) {
             throw new BadRequestAlertException("A new MovieList cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        MovieListEntity entityResult=null;
-        try {
-            entityResult = service.save(movieListEntity);
-        }catch (Exception e){
-            logUtil.error(this.getClass().getName() + " [post]", e.getMessage());
-            throw (URISyntaxException)new URISyntaxException(e.toString(),"Error post identities").initCause(e);
-        }
+        MovieListEntity entityResult=service.save(movieListEntity);
         return ResponseEntity.created(new URI("/api/identities/" + entityResult.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,String.valueOf(entityResult.getId()))).body(entityResult);
     }
