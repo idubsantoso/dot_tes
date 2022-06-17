@@ -13,6 +13,7 @@ import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,8 @@ import java.util.concurrent.TimeUnit;
 public class TechnicalTesRest {
     @Autowired
     private ApiService service;
+    @Value("{key.api}")
+    private String apikey;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping(value = "/get-external")
@@ -141,7 +144,7 @@ public class TechnicalTesRest {
     @GetMapping(value = "/get-external/request-themoviedb")
     public ResponseEntity<Object> getMovieExternalAPI() throws IOException, URISyntaxException {
         log.info("REST Request to getMovieExternalAPI");
-        URL urlForGetRequest = new URL("https://api.themoviedb.org/3/movie/550?api_key=95467e28a39b346de61f7c8f8f3f6cea");
+        URL urlForGetRequest = new URL("https://api.themoviedb.org/3/movie/550?api_key="+apikey);
         String readLine = null;
         StringBuilder response = new StringBuilder();
         HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
