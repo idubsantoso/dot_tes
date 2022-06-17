@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 public class TechnicalTesRest {
     @Autowired
     private ApiService service;
-    @Value("{key.api}")
+    @Value("${key.api}")
     private String apikey;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
